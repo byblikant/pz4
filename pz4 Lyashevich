@@ -1,0 +1,33 @@
+#include <iostream>
+#include <stack>
+#include <string>
+using namespace std;
+
+bool proverka(string line){
+    stack <char> steck;
+    for (int i =0; i <=line.size(); i++) {
+        switch(line[i]) {
+            case '{':
+                steck.push(line[i]);
+                break;
+            case '(':
+                steck.push(line[i]);
+                break;
+            case '[':
+                steck.push(line[i]);
+                break;
+            case ']':
+            case ')':
+            case '}':
+                if (steck.top() == line[i]-1 or steck.top() == line[i]-2)
+                    steck.pop();
+        }
+    }
+    return steck.empty();
+}
+
+int main(){
+    string stroka;
+    cin >> stroka;
+    cout << (proverka(stroka) ? "yes" : "no");
+}
